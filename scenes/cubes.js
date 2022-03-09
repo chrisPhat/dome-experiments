@@ -22,31 +22,22 @@ function setupScene(scene) {
     scene.add(box);
     boxes.push(box);
     
-    // Green cube to the right
-    var box = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: 0x00ff00}));
-    box.position.x = domeDiameter/2;
-    box.position.y = eyeHeight;
-    scene.add(box);
-    boxes.push(box);
-    
-    // Yellow cube to the left
-    var box = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: 0x0ffff00}));
-    box.position.x = -domeDiameter/2;
-    box.position.y = eyeHeight;
-    scene.add(box);
-    boxes.push(box);
-    
-    // Blue cube directly above
-    var box = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: 0x0000ff}));
-    box.position.y = domeDiameter/2;
-    scene.add(box);
-    boxes.push(box);
-
-    // Hello, World!
-    var text = getTextElement("Hello, Dome!", 1);
-    text.position.z = -8;
-    text.position.y = 0;
-    scene.add(text);
+    document.addEventListener('keydown', (e)=>{
+        console.log(e);
+        switch(e.code) {
+            case 'ArrowUp':
+            box.position.y  += 1;
+            break;
+            case 'ArrowDown' :
+            box.position.y -= 1;
+            break;
+            case 'ArrowLeft' :
+            box.position.x -= 1;
+            break;
+            case 'ArrowRight' :
+            box.position.x += 1;
+        }
+    })
 
     RendererConfig.animationCallback = function(t) {
         boxes.forEach(
